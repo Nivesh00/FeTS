@@ -15,7 +15,7 @@ then
         echo "Docker network 'dbcluster' already exists"
 # network doesn't exists
 else
-        docker network create --subnet=192.168.0.0/16
+        docker network create dbcluster --subnet=192.168.0.0/16
 fi
 
 # pull docker image
