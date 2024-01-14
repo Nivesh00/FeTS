@@ -6,6 +6,8 @@
 
 # NEW_PASSWORD set in a config file
 # DATABASE_SCHEMA set in a config file
+source ./config.sh
+
 
 # check if script is run as root
 if [ "${EUID}" -ne 0 ];
