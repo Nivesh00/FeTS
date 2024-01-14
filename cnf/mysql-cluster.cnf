@@ -14,7 +14,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
 [ndbd default]
-NoOfReplicas=2
+NoOfReplicas=4
 DataMemory=80M
 IndexMemory=18M
 
