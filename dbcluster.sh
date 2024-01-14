@@ -4,6 +4,8 @@
 # Script creates a MySQL database cluster with 1 manager node,
 # 1 MySQL node and 2 data nodes
 
+NEW_PASSWORD="itsadmin"
+DATABASE_SCHEMA="test_db"
 
 # check if script is run as root
 if [ "${EUID}" -ne 0 ];
@@ -82,10 +84,17 @@ echo ""
 echo "Currently running on MySQL node, command used:"
 echo "> docker exec -it mysql1 mysql -uroot -p"
 echo "Command to change password to itsadmin:"
-echo "> ALTER USER 'root'@'localhost' IDENTIFIED BY 'itsadmin';"
+echo "> ALTER USER 'root'@'localhost' IDENTIFIED BY '${NEW_PASSWORD}';"
+echo "Command to create schema test_db"
+echo "> CREATE SCHEMA ${DATABASE_SCHEMA};"
 echo ""
 # open mysql1 MySQL container to inject commands
 docker exec -it mysql1 mysql -uroot -p
+# populate database test_db immediately after exiting
+echo "Database ${DATABASE_SCHEMA} is now being populated..."
+cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --pasword=${NEW_PASSWORD} --database=${DATABASE_SCHEMA}
+echo "Database successfully populated"
+echo ""
 
 
 # instructions for mgmt1 manager node
