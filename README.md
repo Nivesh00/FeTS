@@ -34,7 +34,7 @@ Data nodes belong in a node group. Simple node group explanation consists of 4 d
 
 
 ## Commands to populate newly created database
-Commands to populate database can be run from a text files. 
+Commands to populate database can be run from a text files
 
 dbcluster.sh will automatically run command after exiting mysql1 container for the first time
 
@@ -44,4 +44,3 @@ dbcluster.sh will automatically run command after exiting mysql1 container for t
 Link provides configuration files for MySQL Cluster 8.0.
 
 After pulling repository, mysql-cluster.cnf file should be edited to reflect wanted cluster
-
