@@ -43,7 +43,7 @@ echo ""
 # create manager node
 echo "Creating management node"
 docker run -d --net=dbcluster --name=mgm1 --ip=192.168.0.2 \
-        --volume="./cnf/my.cnf":"/etc/my.cnf"
+        --volume="./cnf/my.cnf":"/etc/my.cnf" \
         --volume="./cnf/mysql-cluster.cnf":"/etc/mysql-cluster.cnf" \
         container-registry.oracle.com/mysql/community-cluster ndb_mgmd
 echo "Management node created"
