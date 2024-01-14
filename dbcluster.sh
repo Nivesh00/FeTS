@@ -94,7 +94,7 @@ echo ""
 docker exec -it mysql1 mysql -uroot -p
 # populate database test_db immediately after exiting
 echo "Database ${DATABASE_SCHEMA} is now being populated..."
-cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --pasword=${NEW_PASSWORD} --database=${DATABASE_SCHEMA}
+cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${NEW_PASSWORD} --database=${DATABASE_SCHEMA}
 echo "Database successfully populated"
 echo ""
 
@@ -104,8 +104,6 @@ echo ""
 echo "Currently running on manager node, command used:"
 echo "> docker exec -it mgmt1 ndb_mgm"
 echo "Use SHOW command for ndb_mgm"
-echo "Start logging"
-echo "> node_id clusterlog on --category=debug"
 echo ""
 # open mgmt1 manager container to manage database
 docker exec -it mgmt1 ndb_mgm
