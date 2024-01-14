@@ -4,8 +4,8 @@
 # Script creates a MySQL database cluster with 1 manager node,
 # 1 MySQL node and 2 data nodes
 
-NEW_PASSWORD="itsadmin"
-DATABASE_SCHEMA="test_db"
+# NEW_PASSWORD set in a config file
+# DATABASE_SCHEMA set in a config file
 
 # check if script is run as root
 if [ "${EUID}" -ne 0 ];
