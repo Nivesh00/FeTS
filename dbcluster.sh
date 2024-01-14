@@ -104,6 +104,8 @@ echo ""
 echo "Currently running on manager node, command used:"
 echo "> docker exec -it mgmt1 ndb_mgm"
 echo "Use SHOW command for ndb_mgm"
+echo "Start logging"
+echo "> node_id clusterlog on --category=debug"
 echo ""
 # open mgmt1 manager container to manage database
 docker exec -it mgmt1 ndb_mgm
