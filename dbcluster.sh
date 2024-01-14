@@ -42,7 +42,7 @@ echo ""
 
 # create manager node
 echo "Creating management node"
-docker run -d --net=dbcluster --name=mgmt1 --ip=192.168.0.2 \
+docker run -d --net=dbcluster --name=mgm1 --ip=192.168.0.2 \
         container-registry.oracle.com/mysql/community-cluster ndb_mgmd
 echo "Management node created"
 echo ""
@@ -106,7 +106,7 @@ echo "> docker exec -it mgmt1 ndb_mgm"
 echo "Use SHOW command for ndb_mgm"
 echo ""
 # open mgmt1 manager container to manage database
-docker exec -it mgmt1 ndb_mgm
+docker exec -it mgm1 ndb_mgm
 
 
 echo ""
