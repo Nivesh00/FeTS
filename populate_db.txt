@@ -1,0 +1,5 @@
+// see README for explanation
+CREATE SCHEMA test_db;
+CREATE TABLE test_db.fullname (id BIGINT NOT NULL AUTO_INCREMENT, fullname VARCHAR(20) NOT NULL, PRIMARY KEY (id));
+INSERT INTO test_db.fullname (fullname) VALUES("Max Musterman"), ("Denise Louis"), ("Leoni Radermann"), ("Marc Müller"), ("Lucas Doppler");
+SELECT * FROM test_db.fullname;
