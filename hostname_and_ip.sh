@@ -1,48 +1,46 @@
-export my_hostname="mgmt" # edit node name here
-export my_ip_suffix="31"  # edit ip suffix her, inc by 1
+export my_hostname=""     # edit node name here
+export my_ip_suffix=""    # edit ip suffix her, inc by 1
 
 echo "+--------------------------------+"
-echo "| FeTS - Fehlertolerante Systeme |" 
+echo "|    Changing hostname and ip    |" 
 echo "+--------------------------------+"
-echo "Praktikum: Miniprojekt"
-echo "Host:      mgmt"            # change host name
-echo "IP:        192.168.205.31"  # change ip
+echo "Project:   MySQL Cluster"
+echo "Host:      ${my_hostname}"
+echo "IP:        192.168.205.${my_ip_suffix}"
 
 if [ "$(id -u)" -ne 0 ];
-  then echo "Skript muss als root ausgefuehrt werden."
+  then echo "Please run script as root."
   exit 1
 fi
 
-if [ -z "${my_hostname}" ] ; then echo "Variable my_hostname nicht gesetzt!" ; fi
-if [ -z "${my_ip_suffix}" ] ; then echo "Variable my_ip_suffix nicht gesetzt!" ; fi
+if [ -z "${my_hostname}" ] ; then echo "Variable my_hostname not set!" ; fi
+if [ -z "${my_ip_suffix}" ] ; then echo "Variable my_ip_suffix not set!" ; fi
 
 echo "-------------------------"
-echo "- Anpassung lokaler IP Adresse"
-#sudo /bin/sed -i "s/10.0.0.51/10.0.0.${my_ip_suffix}/g" /etc/network/interfaces
+echo "- Editing local IP address"
 sudo /bin/sed -i "s/192.168.205.51/192.168.205.${my_ip_suffix}/g" /etc/network/interfaces
 
+# local hosts table can have more or less hosts, here only 3 set
 echo "-------------------------"
-echo "- Anpassung lokaler Hosts Tabelle"
+echo "- Editing lokal hosts table"
 sudo tee /etc/hosts <<EOF
 127.0.0.1 localhost
-# Altes Praktikumsnetz
-#10.0.0.31 cluster1.itsdomain.local mgmt
-#10.0.0.32 cluster2.itsdomain.local ndb1
-#10.0.0.33 cluster3.itsdomain.local ndb2
-192.168.205.31 cluster1.itsdomain.local mgmt
-192.168.205.32 cluster2.itsdomain.local ndb1
-192.168.205.33 cluster3.itsdomain.local ndb2
+192.168.205.31 cluster1.itsdomain.local xxxx    # replace xxxx with hostname
+192.168.205.32 cluster2.itsdomain.local xxxx    # replace xxxx with hostname
+192.168.205.33 cluster3.itsdomain.local xxxx    # replace xxxx with hostname
 EOF
 
 echo "-------------------------"
-echo "- Anpassung Hostname"
+echo "- Editing hostname"
 sudo tee /etc/hostname <<EOF
 ${my_hostname}
 EOF
 
 echo "-------------------------"
-echo "Anpassungen abgeschlossen"
+echo "Editing done!"
 echo ""
 echo "!!!---!!!---!!!---!!!---!!!---"
-echo "Bitte starten Sie die VM neu"
+echo " VM will restart in 5 seconds "
 echo "!!!---!!!---!!!---!!!---!!!---"
+
+/sbin/reboot
