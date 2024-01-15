@@ -56,6 +56,8 @@ docker run -d --net=dbcluster --name=ndb1 --ip=192.168.0.3 \
         container-registry.oracle.com/mysql/community-cluster ndbd
 docker run -d --net=dbcluster --name=ndb2 --ip=192.168.0.4 \
         container-registry.oracle.com/mysql/community-cluster ndbd
+#docker run -d --net=dbcluster --name=ndb3 --ip=192.168.0.5 \
+#        container-registry.oracle.com/mysql/community-cluster ndbd
 echo "Data nodes created"
 echo ""
 
