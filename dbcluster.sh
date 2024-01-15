@@ -6,8 +6,9 @@
 
 # NEW_PASSWORD set in a config file
 # DATABASE_SCHEMA set in a config file
-source ./config.sh
+# source ./config.sh
 
+export DATABASE_SCHEMA="test_db"
 
 # check if script is run as root
 if [ "${EUID}" -ne 0 ];
@@ -77,40 +78,45 @@ while [ -z "${PASSWORD}" ]
 do
         echo -ne "Waiting for containers to be up and running...\r"
         sleep 1s
-        PASSWORD=$(docker logs mysql1 2>&1 | grep PASSWORD)
+        # PASSWORD=$(docker logs mysql1 2>&1 | grep PASSWORD)
+        PASS_LINE=$(docker logs mysql1 2>&1 | grep PASSWORD)
+        export PASSWORD=$("$PASS_LINE" | awk '{print $NF}')
 done
 # get password for mysql1 container and print to console
 echo ""
 echo "Containers are up and running"
-echo "${PASSWORD}"
+# echo "${PASSWORD}"
+
+
+cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${PASSWORD}
 
 
 # instructions for mysql1 MySQL node
-echo ""
-echo "Currently running on MySQL node, command used:"
-echo "> docker exec -it mysql1 mysql -uroot -p"
-echo "Command to change password to itsadmin:"
-echo "> ALTER USER 'root'@'localhost' IDENTIFIED BY '${NEW_PASSWORD}';"
-echo "Command to create schema test_db"
-echo "> CREATE SCHEMA ${DATABASE_SCHEMA};"
-echo ""
+#echo ""
+#echo "Currently running on MySQL node, command used:"
+#echo "> docker exec -it mysql1 mysql -uroot -p"
+#echo "Command to change password to itsadmin:"
+#echo "> ALTER USER 'root'@'localhost' IDENTIFIED BY '${NEW_PASSWORD}';"
+#echo "Command to create schema test_db"
+#echo "> CREATE SCHEMA ${DATABASE_SCHEMA};"
+#echo ""
 # open mysql1 MySQL container to inject commands
-docker exec -it mysql1 mysql -uroot -p
+#docker exec -it mysql1 mysql -uroot -p
 # populate database test_db immediately after exiting
 echo "Database ${DATABASE_SCHEMA} is now being populated..."
-cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${NEW_PASSWORD} --database=${DATABASE_SCHEMA}
+#cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${NEW_PASSWORD} --database=${DATABASE_SCHEMA}
 echo "Database successfully populated"
 echo ""
 
 
 # instructions for mgmt1 manager node
-echo ""
-echo "Currently running on manager node, command used:"
-echo "> docker exec -it mgmt1 ndb_mgm"
-echo "Use SHOW command for ndb_mgm"
-echo ""
+#echo ""
+#echo "Currently running on manager node, command used:"
+#echo "> docker exec -it mgmt1 ndb_mgm"
+#echo "Use SHOW command for ndb_mgm"
+#echo ""
 # open mgmt1 manager container to manage database
-docker exec -it mgm1 ndb_mgm
+#docker exec -it mgm1 ndb_mgm
 
 
 echo ""
