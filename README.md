@@ -42,4 +42,4 @@ dbcluster.sh will automatically run command after exiting mysql1 container for t
 [mysql-cluster-files](https://github.com/mysql/mysql-docker/tree/mysql-cluster/8.0)
 Link provides configuration files for MySQL Cluster 8.0.
 
-After pulling repository, mysql-cluster.cnf file should be edited to reflect wanted cluster
+Bind cnf files to docker container ndb_mgm. In cnf folder, my.cnf and mysql-cluster.cnf file should be edited to reflect wanted cluster
