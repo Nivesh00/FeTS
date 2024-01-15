@@ -2,7 +2,6 @@
 [mysql-cluster-install-docker](https://dev.mysql.com/doc/refman/8.0/en/mysql-cluster-install-docker.html)
 
 __Cluster will be created on one machine only due to personal hardware limitations__
-__Cluster on different machines will be implemented later__
 
 ## Passwords and schema names
 Password and names muss be edited in the config.sh file
