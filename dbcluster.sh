@@ -6,7 +6,7 @@
 
 # NEW_PASSWORD set in a config file
 # DATABASE_SCHEMA set in a config file
-DATABASE_SCHEMA=""
+DATABASE_SCHEMA="test_db"
 
 # check if script is run as root
 if [ "${EUID}" -ne 0 ];
@@ -83,8 +83,6 @@ echo ""
 echo "Containers are up and running"
 # echo "${PASSWORD}"
 PASSWORD_AUTO=$(echo "$(docker logs mysql1 2>&1 | grep PASSWORD)" | awk '{print $NF}')
-cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${PASSWORD_AUTO}
-
 
 # instructions for mysql1 MySQL node
 #echo ""
@@ -98,8 +96,8 @@ cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${PAS
 # open mysql1 MySQL container to inject commands
 #docker exec -it mysql1 mysql -uroot -p
 # populate database test_db immediately after exiting
-echo "Database ${DATABASE_SCHEMA} is now being populated..."
-#cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${NEW_PASSWORD} --database=${DATABASE_SCHEMA}
+echo "Database ${DATABASE_SCHEMA} is now being created and populated..."
+cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${PASSWORD_AUTO}
 echo "Database successfully populated"
 echo ""
 
@@ -107,7 +105,7 @@ echo ""
 # instructions for mgmt1 manager node
 #echo ""
 #echo "Currently running on manager node, command used:"
-#echo "> docker exec -it mgmt1 ndb_mgm"
+#echo "> docker exec -it mgm1 ndb_mgm"
 #echo "Use SHOW command for ndb_mgm"
 #echo ""
 # open mgmt1 manager container to manage database
