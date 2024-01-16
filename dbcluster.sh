@@ -72,9 +72,9 @@ echo ""
 
 
 # initialise PASSWORD variable
-PASSWORD=""
+PASSWORD_AUTO=""
 # wait for Password to be set, i.e. wait for containers to be ready then
-while [ -z "${PASSWORD}" ]
+while [ -z "${PASSWORD_AUTO}" ]
 do
         echo -ne "Waiting for containers to be up and running...\r"
         sleep 1s
