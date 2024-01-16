@@ -69,7 +69,10 @@ echo "MySQL node created"
 echo ""
 
 
-# initialise PASSWORD variable
+# MySQL Server generates a password automatically, following function pulls
+# the password from docker logs and sets PASSWORD_AUTO variable value to
+# that of the auto-generated password
+# initialise PASSWORD_AUTO variable
 PASSWORD_AUTO=""
 # wait for Password to be set, i.e. wait for containers to be ready then
 while [ -z "${PASSWORD_AUTO}" ]
@@ -78,38 +81,20 @@ do
         sleep 1s
         PASSWORD_AUTO=$(docker logs mysql1 2>&1 | grep PASSWORD)
 done
-# get password for mysql1 container and print to console
+PASSWORD_AUTO=$(echo "$(docker logs mysql1 2>&1 | grep PASSWORD)" | awk '{print $NF}')
 echo ""
 echo "Containers are up and running"
-# echo "${PASSWORD}"
-PASSWORD_AUTO=$(echo "$(docker logs mysql1 2>&1 | grep PASSWORD)" | awk '{print $NF}')
 
-# instructions for mysql1 MySQL node
-#echo ""
-#echo "Currently running on MySQL node, command used:"
-#echo "> docker exec -it mysql1 mysql -uroot -p"
-#echo "Command to change password to itsadmin:"
-#echo "> ALTER USER 'root'@'localhost' IDENTIFIED BY '${NEW_PASSWORD}';"
-#echo "Command to create schema test_db"
-#echo "> CREATE SCHEMA ${DATABASE_SCHEMA};"
-#echo ""
-# open mysql1 MySQL container to inject commands
-#docker exec -it mysql1 mysql -uroot -p
-# populate database test_db immediately after exiting
+
+# populate database
 echo "Database ${DATABASE_SCHEMA} is now being created and populated..."
+echo "Waiting 10 seconds..."
+sleep 10s
+# injects SQL commands from populate_db.txt into mysql1 container to populate database
 cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${PASSWORD_AUTO}
 echo "Database successfully populated"
 echo ""
 
-
-# instructions for mgmt1 manager node
-#echo ""
-#echo "Currently running on manager node, command used:"
-#echo "> docker exec -it mgm1 ndb_mgm"
-#echo "Use SHOW command for ndb_mgm"
-#echo ""
-# open mgmt1 manager container to manage database
-#docker exec -it mgm1 ndb_mgm
 
 
 echo ""
