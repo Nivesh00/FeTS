@@ -4,7 +4,7 @@
 __Cluster will be created on one machine only due to personal hardware limitations__
 
 ## Passwords and schema names
-Password and names muss be edited in the config.sh file
+Password and schema muss be manually edited, default schema is 'test_db' (schema needed for dummy data) and password must be configured in dummy_data.txt
 
 ## Starting and running containers
 To set-up and run the cluster, first set your new password in dummy_data.txt then run the __dbcluster.sh__ script as root
