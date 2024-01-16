@@ -80,13 +80,14 @@ do
         sleep 1s
         # PASSWORD=$(docker logs mysql1 2>&1 | grep PASSWORD)
         PASS_LINE=$(docker logs mysql1 2>&1 | grep PASSWORD)
-        export PASSWORD=$("$PASS_LINE" | awk '{print $NF}')
+        PASSWORD_AUTO=$("$PASS_LINE" | awk '{print $NF}')
 done
 # get password for mysql1 container and print to console
 echo ""
 echo "Containers are up and running"
 # echo "${PASSWORD}"
 
+export PASSWORD=${PASSWORD_AUTO}
 
 cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${PASSWORD}
 
