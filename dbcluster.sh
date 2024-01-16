@@ -4,8 +4,9 @@
 # Script creates a MySQL database cluster with 1 manager node,
 # 1 MySQL node and 2 data nodes
 
-# NEW_PASSWORD set in a config file
-# DATABASE_SCHEMA set in a config file
+
+# database schema can be changed, here it needs to be #test_db' as dummy data
+# uses this schema
 DATABASE_SCHEMA="test_db"
 
 # check if script is run as root
@@ -91,7 +92,7 @@ echo "Database ${DATABASE_SCHEMA} is now being created and populated..."
 echo "Waiting 10 seconds..."
 sleep 10s
 # injects SQL commands from populate_db.txt into mysql1 container to populate database
-cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${PASSWORD_AUTO}
+cat ./dummy_data.txt | docker exec -i mysql1 mysql --user=root --password=${PASSWORD_AUTO}
 echo "Database successfully populated"
 echo ""
 
