@@ -6,9 +6,7 @@
 
 # NEW_PASSWORD set in a config file
 # DATABASE_SCHEMA set in a config file
-# source ./config.sh
-
-export DATABASE_SCHEMA="test_db"
+source ./config.sh
 
 # check if script is run as root
 if [ "${EUID}" -ne 0 ];
@@ -84,8 +82,8 @@ done
 echo ""
 echo "Containers are up and running"
 # echo "${PASSWORD}"
-export MYSQL1=$(echo "$(docker logs mysql1 2>&1 | grep PASSWORD)" | awk '{print $NF}')
-cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${MYSQL1}
+PASSWORD_AUTO=$(echo "$(docker logs mysql1 2>&1 | grep PASSWORD)" | awk '{print $NF}')
+cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${PASSWORD_AUTO}
 
 
 # instructions for mysql1 MySQL node
