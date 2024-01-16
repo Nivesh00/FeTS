@@ -84,8 +84,8 @@ done
 echo ""
 echo "Containers are up and running"
 # echo "${PASSWORD}"
-export PASS=$(echo "$(docker logs mysql1 2>&1 | grep PASSWORD)" | awk '{print $NF}')
-cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${PASS}
+export MYSQL1=$(echo "$(docker logs mysql1 2>&1 | grep PASSWORD)" | awk '{print $NF}')
+cat ./populate_db.txt | docker exec -i mysql1 mysql --user=root --password=${MYSQL1}
 
 
 # instructions for mysql1 MySQL node
