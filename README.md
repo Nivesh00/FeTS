@@ -7,7 +7,8 @@ __Cluster will be created on one machine only due to personal hardware limitatio
 Password and names muss be edited in the config.sh file
 
 ## Starting and running containers
-To set-up and run the cluster, run the __dbcluster.sh__ script as root
+To set-up and run the cluster, first set your new password in dummy_data.txt then run the __dbcluster.sh__ script as root
+
 
 Cluster is standard and will contain 1 manager node (mgmt1), 1 MySQL node (mysql1) and 2 data nodes (ndb1, ndb2)
 
@@ -28,9 +29,7 @@ Data nodes belong in a node group. Simple node group explanation consists of 4 d
 
 
 ## Commands to populate newly created database
-Commands to populate database can be run from a text files
-
-dbcluster.sh will automatically run command after exiting mysql1 container for the first time
+dbcluster.sh will automatically create a Schema 'test_db' and populate it with the dummy data
 
 ## if more nodes are needed
 
