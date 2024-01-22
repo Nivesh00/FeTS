@@ -52,16 +52,26 @@ echo ""
 
 # create data nodes
 echo "Creating $DATA_NODES data nodes"
-NODE_NAME=1
-while [ $NODE_NAME -lt $MAX_DATA_NODES ]
-do
-  echo ""
-  NODE_IP=$NODE_NAME + 2
-  docker run -d --net=dbcluster --name=ndb${NODE_NAME} --ip=192.168.0.${NODE_IP} \
-        container-registry.oracle.com/mysql/community-cluster ndbd
-  echo "ndb${NODE_NAME} created!"
-  echo ""
-done
+#NODE_NAME=1
+#while [ $NODE_NAME -lt $MAX_DATA_NODES ]
+#do
+#  echo ""
+#  NODE_IP=$NODE_NAME + 2
+#  docker run -d --net=dbcluster --name=ndb${NODE_NAME} --ip=192.168.0.${NODE_IP} \
+#        container-registry.oracle.com/mysql/community-cluster ndbd
+#  echo "ndb${NODE_NAME} created!"
+#  echo ""
+#done
+
+docker run -d --net=dbcluster --name=ndb1 --ip=192.168.0.3 \
+      container-registry.oracle.com/mysql/community-cluster ndbd
+docker run -d --net=dbcluster --name=ndb2 --ip=192.168.0.4 \
+      container-registry.oracle.com/mysql/community-cluster ndbd
+docker run -d --net=dbcluster --name=ndb3 --ip=192.168.0.5 \
+      container-registry.oracle.com/mysql/community-cluster ndbd
+docker run -d --net=dbcluster --name=ndb4 --ip=192.168.0.6 \
+      container-registry.oracle.com/mysql/community-cluster ndbd
+
 echo "Data nodes created"
 echo ""
 
