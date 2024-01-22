@@ -103,9 +103,8 @@ echo "Containers are up and running"
 
 # populate database
 echo "Database for dummy data is now being created and populated..."
-WAIT=$MAX_DATA_NODE * 30
-echo "Waiting $WAIT seconds..."
-sleep $WAIT
+echo "Waiting 60 seconds..."
+sleep 60s
 # injects SQL commands from populate_db.txt into mysql1 container to populate database
 cat ./dummy_data.txt | docker exec -i mysql1 mysql --user=root --password=${PASSWORD_AUTO}
 echo "Database successfully populated"
