@@ -33,11 +33,17 @@ NodeId=3
 hostname=192.168.0.4
 datadir=/var/lib/mysql
 
-#[ndbd]
-#NodeId=5
-#hostname=192.168.0.5
-#datadir=/var/lib/mysql
+[ndbd]
+NodeId=4
+hostname=192.168.0.5
+datadir=/var/lib/mysql
+
+
+[ndbd]
+NodeId=5
+hostname=192.168.0.6
+datadir=/var/lib/mysql
   
 [mysqld]
-NodeId=4
+NodeId=6
 hostname=192.168.0.10
