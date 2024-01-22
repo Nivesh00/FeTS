@@ -59,7 +59,6 @@ do
   NODE_IP=$NODE_NAME + 2
   docker run -d --net=dbcluster --name=ndb${NODE_NAME} --ip=192.168.0.${NODE_IP} \
         container-registry.oracle.com/mysql/community-cluster ndbd
-
   echo "ndb${NODE_NAME} created!"
   echo ""
 done
