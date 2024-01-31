@@ -10,7 +10,7 @@ Password and schema muss be manually edited, default schema is 'test_db' (schema
 To set-up and run the cluster, first set your new password in dummy_data.txt then run the __dbcluster.sh__ script as root
 
 
-Cluster is standard and will contain 1 manager node (mgmt1), 1 MySQL node (mysql1) and 4 data nodes (ndb1, ndb2)
+Cluster is standard and will contain 1 manager node (mgmt1), 1 MySQL node (mysql1) and 4 data nodes (ndb1 - ndb4)
 
 dbcluster.sh does the following
 - create a docker network called dbcluster on subnet 192.168.0.0/16
